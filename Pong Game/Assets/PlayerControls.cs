@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
 
-    public KeyCode moveUp = KeyCode.UpArrow;
-    public KeyCode moveDown = KeyCode.DownArrow;
+    public KeyCode moveUp = KeyCode.W;
+    public KeyCode moveDown = KeyCode.S;
 
     public float speed = 10.0f;
 
