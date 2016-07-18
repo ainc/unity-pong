@@ -6,10 +6,6 @@ public class BallControl : MonoBehaviour {
     private Rigidbody2D rb2d;
     private Vector2 vel;
 
-    IEnumerator Hi(float secs){
-        yield return new WaitForSeconds(secs);
-    }
-
     void GoBall(){
         float rand = Random.Range(0.0f, 2.0f);
         if(rand < 1.0f){
@@ -22,9 +18,7 @@ public class BallControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
-        vel = rb2d.velocity;
-        Hi(2.0f);
-        GoBall();
+        Invoke("GoBall", 2.0f);
 	}
 
     void ResetBall(){
@@ -36,13 +30,13 @@ public class BallControl : MonoBehaviour {
 
     void RestartGame(){
         ResetBall();
-        Hi(0.5f);
-        GoBall();
+        Invoke("GoBall", 1.0f);
     }
 
     void OnCollisionEnter2D (Collision2D coll) {
         if(coll.collider.CompareTag("Player")){
-            vel.y = (vel.y / 2.0f) + (coll.collider.attachedRigidbody.velocity.y / 3.0f);
+            vel.x = rb2d.velocity.x;
+            vel.y = (rb2d.velocity.y / 2.0f) + (coll.collider.attachedRigidbody.velocity.y / 3.0f);
             rb2d.velocity = vel;
         }
     }
