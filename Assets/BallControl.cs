@@ -5,7 +5,6 @@ using UnityEngine;
 public class BallControl : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
-	private Vector2 vel;
 
 	void GoBall() {
 		float rand = Random.Range (0, 2);
@@ -23,8 +22,7 @@ public class BallControl : MonoBehaviour {
 	}
 
 	void ResetBall() {
-		vel = new Vector2 (0, 0);
-		rb2d.velocity = vel;
+		rb2d.velocity = new Vector2 (0, 0);
 		transform.position = Vector2.zero;
 	}
 
@@ -35,6 +33,7 @@ public class BallControl : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.collider.CompareTag ("Player")) {
+			Vector2 vel;
 			vel.x = rb2d.velocity.x;
 			vel.y = (rb2d.velocity.y / 2.0f) + (coll.collider.attachedRigidbody.velocity.y / 3.0f);
 			rb2d.velocity = vel;
